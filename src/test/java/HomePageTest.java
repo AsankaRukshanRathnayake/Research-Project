@@ -1,7 +1,7 @@
 import Constants.LabelConstants;
-import functions.categoryFunctions;
-import functions.homeFunctions;
+import functions.*;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.example.Main;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
@@ -9,171 +9,105 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class HomePageTest {
+import java.awt.*;
 
-    WebDriver driver1;
+import static functions.MainFunctions.driver1;
+
+public class HomePageTest {
 
     @BeforeMethod
     public void setup(){
-        WebDriverManager.chromedriver().setup();
-        driver1 = new ChromeDriver();
+        MainFunctions.setup();
+        driver1.get("https://www.keellssuper.com/");
     }
 
     @AfterMethod
-    public void end(){
+    public void close(){
         driver1.close();
         driver1.quit();
     }
 
-    @Test(description = "REPRO-1", alwaysRun = true)
-    public void verifyHomePageIsLoading(){
-        driver1.get("https://ikman.lk/");
-        String AllOfSriLanka = homeFunctions.getAllOfSriLankaButtonText(driver1);
-        Assert.assertEquals(AllOfSriLanka, "All of Sri Lanka");
+    @Test(description = "RPKE-TC-01 - Verify Hello popup is loaded", alwaysRun = true)
+    public void verifyHelloPopupIsDisplayed(){
+        Assert.assertTrue(homeFunctions.isHHelloPopupDisplayed());
     }
 
-    @Test(description = "REPRO-2", alwaysRun = true)
-    public void verifyHomePageContent(){
-        driver1.get("https://ikman.lk/");
-        Assert.assertEquals(homeFunctions.getElectronicsLabelText(driver1), LabelConstants.ELECTRONICS);
-        Assert.assertEquals(homeFunctions.getPropertyLabelText(driver1), LabelConstants.PROPERTY);
-        Assert.assertEquals(homeFunctions.getVehiclesLabelText(driver1), LabelConstants.VEHICLES);
-        Assert.assertEquals(homeFunctions.getHomeAndGardenLabelText(driver1), LabelConstants.HOME_AND_GARDEN);
-        Assert.assertEquals(homeFunctions.getServicesLabelText(driver1), LabelConstants.SERVICES);
-        Assert.assertEquals(homeFunctions.getBusinessAndIndustryLabelText(driver1), LabelConstants.BUSINESS_AND_INDUSTRY);
-        Assert.assertEquals(homeFunctions.getJobsLabelText(driver1), LabelConstants.JOBS);
-        Assert.assertEquals(homeFunctions.getHobbyLabelText(driver1), LabelConstants.HOBBY_SPORT_AND_KIDS);
-        Assert.assertEquals(homeFunctions.getAnimalsLabelText(driver1), LabelConstants.ANIMALS);
-        Assert.assertEquals(homeFunctions.getFashionAndBeautyLabelText(driver1), LabelConstants.FASHION_AND_BEAUTY);
-        Assert.assertEquals(homeFunctions.getEducationLabelText(driver1), LabelConstants.EDUCATION);
-        Assert.assertEquals(homeFunctions.getOtherLabelText(driver1), LabelConstants.OTHER);
-        Assert.assertEquals(homeFunctions.getEssentialsLabelText(driver1), LabelConstants.ESSENTIALS);
-        Assert.assertEquals(homeFunctions.getAgricultureLabelText(driver1), LabelConstants.AGRICULTURE);
-        Assert.assertEquals(homeFunctions.getWorkOverseasLabelText(driver1), LabelConstants.WORK_OVERSEAS);
+    @Test(description = "RPKE-TC-02 - Verify Hello popup Close Button is present", alwaysRun = true)
+    public void verifyHelloPopupCloseButtonIsDisplayed(){
+        Assert.assertTrue(homeFunctions.isHelloPopupCloseButtonDisplayed());
+        Assert.assertEquals(homeFunctions.getHelloPopupCloseButtonText(), "X");
     }
 
-    @Test(description = "REPRO-3", alwaysRun = true)
-    public void verifyBrowseByCategoryTextIsDisplayed(){
-        driver1.get("https://ikman.lk/");
-        Assert.assertEquals(homeFunctions.getBrowseByCategoryText(driver1), LabelConstants.BROWSE_BY_CATEGORY);
+    @Test(description = "RPKE-TC-03 - Verify Hello popup Close Button is working", alwaysRun = true)
+    public void verifyHelloPopupCloseButtonWorking(){
+        homeFunctions.closeHelloPopup();
     }
 
-    @Test(description = "REPRO-4", alwaysRun = true)
-    public void verifyElectronicsPageIsLoading(){
-        driver1.get("https://ikman.lk/");
-        homeFunctions.clickOnElectronicsButton(driver1);
-        Assert.assertEquals(categoryFunctions.getCategoryLabelText(driver1), LabelConstants.ELECTRONICS);
+    @Test(description = "RPKE-TC-04 - Verify content of the header", alwaysRun = true)
+    public void verifyHeaderContent(){
+        homeFunctions.closeHelloPopup();
+        Assert.assertTrue(homeFunctions.isKeellsLogoDisplayed());
+        Assert.assertEquals(homeFunctions.getTrackMyOrderText(), LabelConstants.TRACK_MY_ORDER);
+        Assert.assertEquals(homeFunctions.getStoreLocationText(), LabelConstants.STORE_LOCATION+"\n"+LabelConstants.DARLEY_ROAD);
+        Assert.assertEquals(homeFunctions.getShippingMethodText(), LabelConstants.SHIPPING_METHOD+"\n"+LabelConstants.DELIVERY);
+        Assert.assertEquals(homeFunctions.getSignupLoginText(), LabelConstants.SIGNUP_LOGIN);
+        Assert.assertEquals(homeFunctions.getHomeText(), LabelConstants.HOME);
+        Assert.assertEquals(homeFunctions.getKeellsProductsText(), LabelConstants.KEELLS_PRODUCTS);
+        Assert.assertEquals(homeFunctions.getKeellsExclusivesText(), LabelConstants.KEELLS_EXCLUSIVES);
+        Assert.assertEquals(homeFunctions.getAllPromotionsText(), LabelConstants.ALL_PROMOTIONS);
+        Assert.assertEquals(homeFunctions.getUtilityBillPaymentText(), LabelConstants.UTILITY_BILL_PAYMENT);
+        Assert.assertEquals(homeFunctions.getCommunityText(), LabelConstants.COMMUNITY);
+        Assert.assertEquals(homeFunctions.getCartText(), LabelConstants.ZERO+"\n"+LabelConstants.ZERO_RUPEES);
     }
 
-    @Test(description = "REPRO-5", alwaysRun = true)
-    public void verifyPropertyPageIsLoading(){
-        driver1.get("https://ikman.lk/");
-        homeFunctions.clickOnPropertyButton(driver1);
-        Assert.assertEquals(categoryFunctions.getCategoryLabelText(driver1), LabelConstants.PROPERTY);
+    @Test(description = "RPKE-TC-19 - verify topic labels in home page", alwaysRun = true)
+    public void verifyHeaderLabels(){
+        homeFunctions.closeHelloPopup();
+        Assert.assertEquals(homeFunctions.getNexusDealsText(), LabelConstants.NEXUS_DEALS);
+        Assert.assertEquals(homeFunctions.getViewAllNexusDealsText(), LabelConstants.VIEW_ALL_NEXUS_DEALS);
+        Assert.assertEquals(homeFunctions.getKeellsDealsInactiveText(), LabelConstants.KEELLS_DEALS);
+        homeFunctions.clickKeellsDeals();
+        Assert.assertEquals(homeFunctions.getViewAllKeellsDealsText(), LabelConstants.VIEW_ALL_KEELLS_DEALS);
+        Assert.assertEquals(homeFunctions.getBestSellersText(), LabelConstants.BEST_SELLERS);
+        Assert.assertEquals(homeFunctions.getFeaturedProductsText(), LabelConstants.FEATURED_PRODUCTS);
+        Assert.assertEquals(homeFunctions.getShopByCategoryText(), LabelConstants.SHOP_BY_CATEGORY);
     }
 
-    @Test(description = "REPRO-6", alwaysRun = true)
-    public void verifyVehiclesPageIsLoading(){
-        driver1.get("https://ikman.lk/");
-        homeFunctions.clickOnVehiclesButton(driver1);
-        Assert.assertEquals(categoryFunctions.getCategoryLabelText(driver1), LabelConstants.VEHICLES);
+    @Test(description = "RPKE-TC-20 - verify click on Keells Deals change the view all promotions button", alwaysRun = true)
+    public void verifyAllPromotionsButtonWhenKeellsDealsIsClicked(){
+        homeFunctions.closeHelloPopup();
+        Assert.assertEquals(homeFunctions.getViewAllNexusDealsText(), LabelConstants.VIEW_ALL_NEXUS_DEALS);
+        homeFunctions.clickKeellsDeals();
+        Assert.assertEquals(homeFunctions.getViewAllKeellsDealsText(), LabelConstants.VIEW_ALL_KEELLS_DEALS);
     }
 
-    @Test(description = "REPRO-7", alwaysRun = true)
-    public void verifyHomeAndGardenPageIsLoading(){
-        driver1.get("https://ikman.lk/");
-        homeFunctions.clickOnHomeAndGardenButton(driver1);
-        Assert.assertEquals(categoryFunctions.getCategoryLabelText(driver1), LabelConstants.HOME_AND_GARDEN);
+    @Test(description = "RPKE-TC-21 - verify click on Nexus Deals change the view all promotions button", alwaysRun = true)
+    public void verifyAllPromotionsButtonWhenNexusDealsIsClicked(){
+        homeFunctions.closeHelloPopup();
+        Assert.assertEquals(homeFunctions.getViewAllNexusDealsText(), LabelConstants.VIEW_ALL_NEXUS_DEALS);
+        homeFunctions.clickKeellsDeals();
+        Assert.assertEquals(homeFunctions.getViewAllKeellsDealsText(), LabelConstants.VIEW_ALL_KEELLS_DEALS);
+        homeFunctions.clickNexusDeals();
+        Assert.assertEquals(homeFunctions.getViewAllNexusDealsText(), LabelConstants.VIEW_ALL_NEXUS_DEALS);
     }
 
-    @Test(description = "REPRO-8", alwaysRun = true)
-    public void verifyServicesPageIsLoading(){
-        driver1.get("https://ikman.lk/");
-        homeFunctions.clickOnServicesButton(driver1);
-        Assert.assertEquals(categoryFunctions.getCategoryLabelText(driver1), LabelConstants.SERVICES);
+    @Test(description = "RPKE-TC-22 - verify view all keells deals button", alwaysRun = true)
+    public void verifyViewAllKeellsDeals(){
+        homeFunctions.closeHelloPopup();
+        homeFunctions.clickKeellsDeals();
+        Assert.assertEquals(homeFunctions.getViewAllKeellsDealsText(), LabelConstants.VIEW_ALL_KEELLS_DEALS);
+        homeFunctions.clickAllKeellsDeals();
+        Assert.assertEquals(promotionFunctions.getDealsTitle2(), LabelConstants.KEELLS_DEALS);
     }
 
-    @Test(description = "REPRO-9", alwaysRun = true)
-    public void verifyBusinessAndIndustryPageIsLoading(){
-        driver1.get("https://ikman.lk/");
-        homeFunctions.clickOnBusinessAndIndustryButton(driver1);
-        Assert.assertEquals(categoryFunctions.getCategoryLabelText(driver1), LabelConstants.BUSINESS_AND_INDUSTRY);
+    @Test(description = "RPKE-TC-23 - verify view all nexus deals button", alwaysRun = true)
+    public void verifyViewAllNexusDeals(){
+        homeFunctions.closeHelloPopup();
+        Assert.assertEquals(homeFunctions.getViewAllNexusDealsText(), LabelConstants.VIEW_ALL_NEXUS_DEALS);
+        homeFunctions.clickAllNexusDeals();
+        Assert.assertEquals(promotionFunctions.getDealsTitle2(), LabelConstants.NEXUS_DEALS);
     }
 
-    @Test(description = "REPRO-10", alwaysRun = true)
-    public void verifyJobsPageIsLoading(){
-        driver1.get("https://ikman.lk/");
-        homeFunctions.clickOnJobsButton(driver1);
-        Assert.assertEquals(categoryFunctions.getCategoryLabelText(driver1), LabelConstants.JOBS);
-    }
 
-    @Test(description = "REPRO-11", alwaysRun = true)
-    public void verifyHobbyPageIsLoading(){
-        driver1.get("https://ikman.lk/");
-        homeFunctions.clickOnHobbyButton(driver1);
-        Assert.assertEquals(categoryFunctions.getCategoryLabelText(driver1), LabelConstants.HOBBY_SPORT_AND_KIDS);
-    }
-
-    @Test(description = "REPRO-12", alwaysRun = true)
-    public void verifyAnimalPageIsLoading(){
-        driver1.get("https://ikman.lk/");
-        homeFunctions.clickOnAnimalsButton(driver1);
-        Assert.assertEquals(categoryFunctions.getCategoryLabelText(driver1), LabelConstants.ANIMALS);
-    }
-
-    @Test(description = "REPRO-13", alwaysRun = true)
-    public void verifyFashionAndBeautyPageIsLoading(){
-        driver1.get("https://ikman.lk/");
-        homeFunctions.clickOnFashionAndBeautyButton(driver1);
-        Assert.assertEquals(categoryFunctions.getCategoryLabelText(driver1), LabelConstants.FASHION_AND_BEAUTY);
-    }
-    @Test(description = "REPRO-14", alwaysRun = true)
-    public void verifyEducationPageIsLoading(){
-        driver1.get("https://ikman.lk/");
-        homeFunctions.clickOnEducationButton(driver1);
-        Assert.assertEquals(categoryFunctions.getCategoryLabelText(driver1), LabelConstants.EDUCATION);
-    }
-
-    @Test(description = "REPRO-15", alwaysRun = true)
-    public void verifyOtherPageIsLoading(){
-        driver1.get("https://ikman.lk/");
-        homeFunctions.clickOnOtherButton(driver1);
-        Assert.assertEquals(categoryFunctions.getCategoryLabelText(driver1), LabelConstants.OTHER);
-    }
-
-    @Test(description = "REPRO-16", alwaysRun = true)
-    public void verifyEssentialsPageIsLoading(){
-        driver1.get("https://ikman.lk/");
-        homeFunctions.clickOnEssentialsButton(driver1);
-        Assert.assertEquals(categoryFunctions.getCategoryLabelText(driver1), LabelConstants.ESSENTIALS);
-    }
-
-    @Test(description = "REPRO-17", alwaysRun = true)
-    public void verifyAgriculturePageIsLoading(){
-        driver1.get("https://ikman.lk/");
-        homeFunctions.clickOnAgricultureButton(driver1);
-        Assert.assertEquals(categoryFunctions.getCategoryLabelText(driver1), LabelConstants.AGRICULTURE);
-    }
-
-    @Test(description = "REPRO-18", alwaysRun = true)
-    public void verifyWorkOverseasPageIsLoading(){
-        driver1.get("https://ikman.lk/");
-        homeFunctions.clickOnWorkOverseasButton(driver1);
-        Assert.assertEquals(categoryFunctions.getCategoryLabelText(driver1), LabelConstants.WORK_OVERSEAS);
-    }
-
-    @Test(description = "REPRO-19 - Verify the header", alwaysRun = true)
-    public void verifyHeader(){
-        driver1.get("https://ikman.lk/");
-        Assert.assertTrue(homeFunctions.isMainLogoFound(driver1));
-        Assert.assertEquals(homeFunctions.getAllAddsButtonText(driver1), LabelConstants.ALL_ADDS);
-    }
-
-    @Test(description = "REPRO-20 - Verify all adds are loaded when the user clicks on All Adds", alwaysRun = true)
-    public void verifyClickAllAdds(){
-        driver1.get("https://ikman.lk/");
-        homeFunctions.clickAllAddsButton(driver1);
-        Assert.assertEquals(homeFunctions.getAllAddsButton2Text(driver1), LabelConstants.ALL_ADDS);
-    }
 
 }

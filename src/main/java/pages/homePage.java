@@ -1,5 +1,7 @@
 package pages;
 
+import functions.MainFunctions;
+import org.example.Main;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,237 +12,169 @@ import java.time.Duration;
 
 public class homePage {
 
-    public static final By ALL_OF_SRI_LANKA_BUTTON =By.xpath("/html/body/div[1]/div/div[1]/div[3]/div[2]/div/button");
+    private static final By HELLO_POPUP = By.xpath("/html/body/div[3]/div/div/div/div");
+    private static final By HELLO_POPUP_CLOSE_BUTTON = By.xpath("/html/body/div[3]/div/div/div/div/div[1]");
 
-    public static final By ELECTRONICS_TEXT = By.xpath("/html/body/div[1]/div/div[1]/div[3]/div[4]/ul/li[1]/a/div[2]/p");
-    public static final By PROPERTY_TEXT    = By.xpath(("/html/body/div[1]/div/div[1]/div[3]/div[4]/ul/li[2]/a/div[2]/p"));
-    public static final By VEHICLES_TEXT    = By.xpath(("/html/body/div[1]/div/div[1]/div[3]/div[4]/ul/li[3]/a/div[2]/p"));
-    public static final By HOME_AND_GARDEN_TEXT   = By.xpath(("/html/body/div[1]/div/div[1]/div[3]/div[4]/ul/li[4]/a/div[2]/p"));
-    public static final By SERVICES_TEXT = By.xpath("/html/body/div[1]/div/div[1]/div[3]/div[4]/ul/li[5]/a/div[2]/p");
-    public static final By BUSINESS_AND_INDUSTRY_TEXT    = By.xpath(("/html/body/div[1]/div/div[1]/div[3]/div[4]/ul/li[6]/a/div[2]/p"));
-    public static final By JOBS_TEXT    = By.xpath(("/html/body/div[1]/div/div[1]/div[3]/div[4]/ul/li[7]/a/div[2]/p"));
-    public static final By HOBBY_SPORT_AND_HOBBY_TEXT    = By.xpath(("/html/body/div[1]/div/div[1]/div[3]/div[4]/ul/li[8]/a/div[2]/p"));
-    public static final By ANIMALS_TEXT    = By.xpath(("/html/body/div[1]/div/div[1]/div[3]/div[4]/ul/li[9]/a/div[2]/p"));
-    public static final By FASHION_AND_BEAUTY_TEXT    = By.xpath(("/html/body/div[1]/div/div[1]/div[3]/div[4]/ul/li[10]/a/div[2]/p"));
-    public static final By EDUCATION_TEXT    = By.xpath(("/html/body/div[1]/div/div[1]/div[3]/div[4]/ul/li[11]/a/div[2]/p"));
-    public static final By OTHER_TEXT    = By.xpath(("/html/body/div[1]/div/div[1]/div[3]/div[4]/ul/li[12]/a/div[2]/p"));
-    public static final By ESSENTIALS_TEXT    = By.xpath(("/html/body/div[1]/div/div[1]/div[3]/div[4]/ul/li[13]/a/div[2]/p"));
-    public static final By AGRICULTURE_TEXT    = By.xpath(("/html/body/div[1]/div/div[1]/div[3]/div[4]/ul/li[14]/a/div[2]/p"));
-    public static final By WORK_OVERSEAS_TEXT    = By.xpath(("/html/body/div[1]/div/div[1]/div[3]/div[4]/ul/li[15]/a/div[2]/p"));
-    public static final By BROWSE_BY_CATEGORY = By.xpath("/html/body/div[1]/div/div[1]/div[3]/div[4]/div/h2");
-    public static final By ELECTRONICS_BUTTON = By.xpath("/html/body/div[1]/div/div[1]/div[3]/div[4]/ul/li[1]/a");
-    public static final By PROPERTY_BUTTON = By.xpath("/html/body/div[1]/div/div[1]/div[3]/div[4]/ul/li[2]/a");
-    public static final By VEHICLES_BUTTON   = By.xpath(("/html/body/div[1]/div/div[1]/div[3]/div[4]/ul/li[3]/a"));
-    public static final By HOME_AND_GARDEN_BUTTON   = By.xpath(("/html/body/div[1]/div/div[1]/div[3]/div[4]/ul/li[4]/a"));
-    public static final By SERVICES_BUTTON = By.xpath("/html/body/div[1]/div/div[1]/div[3]/div[4]/ul/li[5]/a");
-    public static final By BUSINESS_AND_INDUSTRY_BUTTON    = By.xpath(("/html/body/div[1]/div/div[1]/div[3]/div[4]/ul/li[6]/a"));
-    public static final By JOBS_BUTTON    = By.xpath(("/html/body/div[1]/div/div[1]/div[3]/div[4]/ul/li[7]/a"));
-    public static final By HOBBY_SPORT_AND_HOBBY_BUTTON   = By.xpath(("/html/body/div[1]/div/div[1]/div[3]/div[4]/ul/li[8]/a"));
-    public static final By ANIMALS_BUTTON   = By.xpath(("/html/body/div[1]/div/div[1]/div[3]/div[4]/ul/li[9]/a"));
-    public static final By FASHION_AND_BEAUTY_BUTTON    = By.xpath(("/html/body/div[1]/div/div[1]/div[3]/div[4]/ul/li[10]/a"));
-    public static final By EDUCATION_BUTTON    = By.xpath(("/html/body/div[1]/div/div[1]/div[3]/div[4]/ul/li[11]/a"));
-    public static final By OTHER_BUTTON    = By.xpath(("/html/body/div[1]/div/div[1]/div[3]/div[4]/ul/li[12]/a"));
-    public static final By ESSENTIALS_BUTTON    = By.xpath(("/html/body/div[1]/div/div[1]/div[3]/div[4]/ul/li[13]/a"));
-    public static final By AGRICULTURE_BUTTON   = By.xpath(("/html/body/div[1]/div/div[1]/div[3]/div[4]/ul/li[14]/a"));
-    public static final By WORK_OVERSEAS_BUTTON   = By.xpath(("/html/body/div[1]/div/div[1]/div[3]/div[4]/ul/li[15]/a"));
-    public static final By MAIN_LOGO = By.xpath("/html/body/div[1]/div/div[1]/div[2]/div/nav/div/ul[1]/li[1]/div/a");
-    public static final By ALL_ADDS_BUTTON = By.xpath("/html/body/div[1]/div/div[1]/div[2]/div/nav/div/ul[1]/li[2]/a");
-    public static final By ALL_ADDS_BUTTON_2 = By.xpath("/html/body/div[2]/div/div[1]/div[2]/nav/div/ul[1]/li[2]/a");
+    //--header
+    private static final By TRACK_MY_ORDER = By.xpath("/html/body/div/div/div[1]/div[1]/div/div/div/div/div[1]/div");
+    private static final By STORE_LOCATION = By.xpath("/html/body/div/div/div[1]/div[1]/div/div/div/div/div[2]");
+    private static final By SHIPPING_METHOD = By.xpath("/html/body/div/div/div[1]/div[1]/div/div/div/div/div[3]");
+    private static final By SIGNUP_LOGIN = By.xpath("/html/body/div/div/div[1]/div[1]/div/div/div/div/div[4]");
+    private static final By KEELLS_LOGO = By.xpath("/html/body/div/div/div[1]/div[2]/div[1]/div[1]/a/img");
+    private static final By HOME = By.xpath("/html/body/div/div/div[1]/div[2]/div[1]/div[2]/div/div/div[1]");
+    private static final By KEELLS_PRODUCTS = By.xpath("/html/body/div/div/div[1]/div[2]/div[1]/div[2]/div/div/div[2]");
+    private static final By KEELLS_EXCLUSIVES = By.xpath("/html/body/div/div/div[1]/div[2]/div[1]/div[2]/div/div/div[3]");
+    private static final By ALL_PROMOTIONS = By.xpath("/html/body/div/div/div[1]/div[2]/div[1]/div[2]/div/div/div[4]");
+    private static final By UTILITY_BILL_PAYMENT = By.xpath("/html/body/div/div/div[1]/div[2]/div[1]/div[2]/div/div/div[5]");
+    private static final By COMMUNITY = By.xpath("/html/body/div/div/div[1]/div[2]/div[1]/div[2]/div/div/div[6]");
+    private static final By CART = By.xpath("/html/body/div/div/div[1]/div[2]/div[1]/div[2]/div/div/div[8]");
 
-    public String getAllOfSriLankaButtonText(WebDriver driver){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(ALL_OF_SRI_LANKA_BUTTON));
-        WebElement button = driver.findElement(ALL_OF_SRI_LANKA_BUTTON);
-        return button.getText();
-    }
-    public String getElectronicsLabelText(WebDriver driver){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(ELECTRONICS_TEXT));
-        WebElement text = driver.findElement(ELECTRONICS_TEXT);
-        return text.getText();
-    }
-    public String getPropertyLabelText(WebDriver driver){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(PROPERTY_TEXT));
-        WebElement text = driver.findElement(PROPERTY_TEXT);
-        return text.getText();
-    }
-    public String getVehiclesLabelText(WebDriver driver){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(VEHICLES_TEXT));
-        WebElement text = driver.findElement(VEHICLES_TEXT);
-        return text.getText();
-    }
-    public String getHomeAndGardenLabelText(WebDriver driver){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(HOME_AND_GARDEN_TEXT));
-        WebElement text = driver.findElement(HOME_AND_GARDEN_TEXT);
-        return text.getText();
-    }
-    public String getServicesLabelText(WebDriver driver){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(SERVICES_TEXT));
-        WebElement text = driver.findElement(SERVICES_TEXT);
-        return text.getText();
-    }
-    public String getBusinessAndIndustryLabelText(WebDriver driver){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(BUSINESS_AND_INDUSTRY_TEXT));
-        WebElement text = driver.findElement(BUSINESS_AND_INDUSTRY_TEXT);
-        return text.getText();
-    }
-    public String getJobsLabelText(WebDriver driver){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(JOBS_TEXT));
-        WebElement text = driver.findElement(JOBS_TEXT);
-        return text.getText();
-    }
-    public String getHobbyLabelText(WebDriver driver){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(HOBBY_SPORT_AND_HOBBY_TEXT));
-        WebElement text = driver.findElement(HOBBY_SPORT_AND_HOBBY_TEXT);
-        return text.getText();
-    }
-    public String getAnimalsLabelText(WebDriver driver){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(ANIMALS_TEXT));
-        WebElement text = driver.findElement(ANIMALS_TEXT);
-        return text.getText();
-    }
-    public String getFashionAndBeautyLabelText(WebDriver driver){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(FASHION_AND_BEAUTY_TEXT));
-        WebElement text = driver.findElement(FASHION_AND_BEAUTY_TEXT);
-        return text.getText();
-    }
-    public String getEducationLabelText(WebDriver driver){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(EDUCATION_TEXT));
-        WebElement text = driver.findElement(EDUCATION_TEXT);
-        return text.getText();
-    }
-    public String getOtherLabelText(WebDriver driver){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(OTHER_TEXT));
-        WebElement text = driver.findElement(OTHER_TEXT);
-        return text.getText();
-    }
-    public String getEssentialsLabelText(WebDriver driver){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(ESSENTIALS_TEXT));
-        WebElement text = driver.findElement(ESSENTIALS_TEXT);
-        return text.getText();
-    }
-    public String getAgricultureLabelText(WebDriver driver){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(AGRICULTURE_TEXT));
-        WebElement text = driver.findElement(AGRICULTURE_TEXT);
-        return text.getText();
-    }
-    public String getWorkOverseasLabelText(WebDriver driver){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(WORK_OVERSEAS_TEXT));
-        WebElement text = driver.findElement(WORK_OVERSEAS_TEXT);
-        return text.getText();
-    }
-    public String getBrowseByCategoryText(WebDriver driver){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(BROWSE_BY_CATEGORY));
-        WebElement text = driver.findElement(BROWSE_BY_CATEGORY);
-        return text.getText();
-    }
-    public void clickOnUIElement(WebDriver driver, By by){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(by));
-        driver.findElement(by).click();
-    }
-
-    public void clickOnElectronicsButton(WebDriver driver){
-        clickOnUIElement(driver, ELECTRONICS_BUTTON);
-    }
-
-    public void clickOnPropertyButton(WebDriver driver){
-        clickOnUIElement(driver, PROPERTY_BUTTON);
-    }
-
-    public void clickOnVehiclesButton(WebDriver driver){
-        clickOnUIElement(driver, VEHICLES_BUTTON);
-    }
-
-    public void clickOnHomeAndGardenButton(WebDriver driver){
-        clickOnUIElement(driver, HOME_AND_GARDEN_BUTTON);
-    }
-
-    public void clickOnServicesButton(WebDriver driver){
-        clickOnUIElement(driver, SERVICES_BUTTON);
-    }
-
-    public void clickOnBusinessAndIndustryButton(WebDriver driver){
-        clickOnUIElement(driver, BUSINESS_AND_INDUSTRY_BUTTON);
-    }
-
-    public void clickOnJobsButton(WebDriver driver){
-        clickOnUIElement(driver, JOBS_BUTTON);
-    }
-
-    public void clickOnHobbyButton(WebDriver driver){
-        clickOnUIElement(driver, HOBBY_SPORT_AND_HOBBY_BUTTON);
-    }
-
-    public void clickOnAnimalsButton(WebDriver driver){
-        clickOnUIElement(driver, ANIMALS_BUTTON);
-    }
-
-    public void clickOnFashionAndBeautyButton(WebDriver driver){
-        clickOnUIElement(driver, FASHION_AND_BEAUTY_BUTTON);
-    }
-
-    public void clickOnEducationButton(WebDriver driver){
-        clickOnUIElement(driver, EDUCATION_BUTTON);
-    }
-
-    public void clickOnOtherButton(WebDriver driver){
-        clickOnUIElement(driver, OTHER_BUTTON);
-    }
-
-    public void clickOnEssentialsButton(WebDriver driver){
-        clickOnUIElement(driver, ESSENTIALS_BUTTON);
-    }
-
-    public void clickOnAgricultureButton(WebDriver driver){
-        clickOnUIElement(driver, AGRICULTURE_BUTTON);
-    }
-
-    public void clickOnWorkOverseasButton(WebDriver driver){
-        clickOnUIElement(driver, WORK_OVERSEAS_BUTTON);
-    }
-
-    public boolean isMainLogoFound(WebDriver driver){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(MAIN_LOGO));
-        return driver.findElement(MAIN_LOGO).isDisplayed();
-    }
-
-    public String getTextByElement(WebDriver driver, By by){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(by));
-        return driver.findElement(by).getText();
-    }
-
-    public String getAllAddsButtonText(WebDriver driver){
-        return getTextByElement(driver, ALL_ADDS_BUTTON);
-    }
-
-    public void clickAllAdds(WebDriver driver){
-        clickOnUIElement(driver, ALL_ADDS_BUTTON);
-    }
-
-    public String getAllAddsButton2Text(WebDriver driver){
-        return getTextByElement(driver, ALL_ADDS_BUTTON_2);
-    }
+    private static final By NEXUS_DEALS = By.cssSelector("#root > div > div.main-content-holder > div > div.all-container > div > div.switcher > div > div.switcher-control-nexus.switcher-control-active");
+    private static final By KEELS_DEALS_INACTIVE = By.cssSelector("#root > div > div.main-content-holder > div > div.all-container > div > div.switcher > div > div.switcher-control-keells");
+    private static final By KEELLS_DEALS = By.cssSelector("#root > div > div.main-content-holder > div > div.all-container > div > div.switcher > div > div.switcher-control-keells.switcher-control-active");
+    private static final By NEXUS_DEALS_INACTIVE = By.cssSelector("#root > div > div.main-content-holder > div > div.all-container > div > div.switcher > div > div.switcher-control-nexus");
+    private static final By VIEW_ALL_NEXUS_DEALS = By.cssSelector("#deals_view_all_nexus_btn");
+    private static final By VIEW_ALL_KEELLS_DEALS = By.cssSelector("#deals_view_all_keells_btn");
+    private static final By BEST_SELLERS = By.cssSelector("#root > div > div.main-content-holder > div > div:nth-child(6) > div > div > div.section-title-text > span");
+    private static final By FEATURED_PRODUCTS = By.cssSelector("#root > div > div.main-content-holder > div > div:nth-child(8) > div > div > div.section-title-text > span");
+    private static final By SHOP_BY_CATEGORIES = By.cssSelector("#root > div > div.main-content-holder > div > div:nth-child(10) > div > div > div.section-title-text > span");
 
 
 
+    public boolean isHelloPopupPresent() {
+        return MainFunctions.isElementDisplayed(HELLO_POPUP);
+    }
 
+    public boolean isCloseButtonPresent() {
+        return MainFunctions.isElementDisplayed(HELLO_POPUP_CLOSE_BUTTON);
+    }
 
+    public String getHelloPopupCloseButtonText() {
+        return MainFunctions.getTextByElement(HELLO_POPUP_CLOSE_BUTTON);
+    }
+
+    public void clickOnHelloPopupCloseButton() {
+        MainFunctions.clickOnUIElement(HELLO_POPUP_CLOSE_BUTTON);
+    }
+
+    //--header
+    public boolean isKeellsLogoDisplayed(){
+        return MainFunctions.isElementDisplayed(KEELLS_LOGO);
+    }
+
+    public String getTrackMyOrderText() {
+        return MainFunctions.getTextByElement(TRACK_MY_ORDER);
+    }
+
+    public String getStoreLocationText() {
+        return MainFunctions.getTextByElement(STORE_LOCATION);
+    }
+
+    public String getShippingMethodText() {
+        return MainFunctions.getTextByElement(SHIPPING_METHOD);
+    }
+
+    public String getSignupLoginText() {
+        return MainFunctions.getTextByElement(SIGNUP_LOGIN);
+    }
+
+    public String getHomeText() {
+        return MainFunctions.getTextByElement(HOME);
+    }
+
+    public String getKeellsProductsText() {
+        return MainFunctions.getTextByElement(KEELLS_PRODUCTS);
+    }
+
+    public String getKeellsExclusivesText() {
+        return MainFunctions.getTextByElement(KEELLS_EXCLUSIVES);
+    }
+
+    public String getAllPromotionsText() {
+        return MainFunctions.getTextByElement(ALL_PROMOTIONS);
+    }
+
+    public String getUtilityBillPaymentText() {
+        return MainFunctions.getTextByElement(UTILITY_BILL_PAYMENT);
+    }
+
+    public String getCommunityText() {
+        return MainFunctions.getTextByElement(COMMUNITY);
+    }
+
+    public String getCartText() {
+        return MainFunctions.getTextByElement(CART);
+    }
+
+    public void clickOnTrackMyOrder(){
+        MainFunctions.clickOnUIElement(TRACK_MY_ORDER);
+    }
+
+    public void clickOnStoreLocation(){
+        MainFunctions.clickOnUIElement(STORE_LOCATION);
+    }
+
+    public void clickOnShippingMethod(){
+        MainFunctions.clickOnUIElement(STORE_LOCATION);
+    }
+
+    public void clickOnLogin(){
+        MainFunctions.clickOnUIElement(SIGNUP_LOGIN);
+    }
+
+    public void clickOnPromotions(){
+        MainFunctions.clickOnUIElement(ALL_PROMOTIONS);
+    }
+
+    public String getNexusDealsText(){
+        return MainFunctions.getTextByElement(NEXUS_DEALS);
+    }
+
+    public String getKeellsDealsText(){
+        return MainFunctions.getTextByElement(KEELLS_DEALS);
+    }
+
+    public String getNexusDealsInactiveText(){
+        return MainFunctions.getTextByElement(NEXUS_DEALS_INACTIVE);
+    }
+
+    public String getKeellsDealsInactiveText(){
+        return MainFunctions.getTextByElement(KEELS_DEALS_INACTIVE);
+    }
+
+    public String getShopByCategoryText(){
+        return MainFunctions.getTextByElement(SHOP_BY_CATEGORIES);
+    }
+
+    public String getFeaturedProductsText(){
+        return MainFunctions.getTextByElement(FEATURED_PRODUCTS);
+    }
+
+    public String getBestSellersText(){
+        return MainFunctions.getTextByElement(BEST_SELLERS);
+    }
+
+    public String getViewAllNexusDealsText(){
+        return MainFunctions.getTextByElement(VIEW_ALL_NEXUS_DEALS);
+    }
+
+    public String getViewAllKeellsDealsText(){
+        return MainFunctions.getTextByElement(VIEW_ALL_KEELLS_DEALS);
+    }
+
+    public void clickNexusDeals(){
+        MainFunctions.clickOnUIElement(NEXUS_DEALS_INACTIVE);
+    }
+
+    public void clickKeellsDeals(){
+        MainFunctions.clickOnUIElement(KEELS_DEALS_INACTIVE);
+    }
+
+    public void clickAllNexusDeals(){
+        MainFunctions.clickOnUIElement(VIEW_ALL_NEXUS_DEALS);
+    }
+
+    public void clickAllKeellsDeals(){
+        MainFunctions.clickOnUIElement(VIEW_ALL_KEELLS_DEALS);
+    }
 }
