@@ -1,5 +1,4 @@
-
-<suite name="Regression Suite">
+<suite name="Regression Suite" parallel="methods" thread-count="2">
     <test name="Home Page Tests">
         <classes>
             <class name="com.keells.HomePageTest"/>
