@@ -1,0 +1,12 @@
+<suite name="Regression Suite" parallel="classes" thread-count="2">
+    <test name="Home Page Tests">
+        <classes>
+            <class name="com.keells.HomePageTest"/>
+            <class name="com.keells.LoginTest"/>
+            <class name="com.keells.PromotionsTest"/>
+            <class name="com.keells.ShippingMethodTest"/>
+            <class name="com.keells.StoreLocationTest"/>
+            <class name="com.keells.TrackOrderTest"/>
+        </classes>
+    </test>
+</suite>

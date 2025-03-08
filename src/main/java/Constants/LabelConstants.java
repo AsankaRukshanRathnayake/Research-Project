@@ -69,4 +69,5 @@ public class LabelConstants {
     public static final String BEST_SELLERS = "Best Sellers";
     public static final String FEATURED_PRODUCTS = "Featured Products";
     public static final String SHOP_BY_CATEGORY = "Shop By Category";
+    public static final String CATEGORIES = "Categories";
 }

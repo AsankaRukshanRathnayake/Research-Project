@@ -39,7 +39,18 @@ public class homePage {
     private static final By FEATURED_PRODUCTS = By.cssSelector("#root > div > div.main-content-holder > div > div:nth-child(8) > div > div > div.section-title-text > span");
     private static final By SHOP_BY_CATEGORIES = By.cssSelector("#root > div > div.main-content-holder > div > div:nth-child(10) > div > div > div.section-title-text > span");
 
+    private static final By CATEGORIES_LABEL = By.cssSelector("#root > div > div.default-header-container > div.default-header-navbar > div:nth-child(2) > div > div > div.product-search > div.category_menu_btn_product_search");
+    private static final By CATEGORIES_DROPDOWN = By.cssSelector("#category_menu_default_header > div > ul");
+    private static final String CATEGORY_LABEL_SELECTOR_1 = "#dep_id_";
+    private static final String SUB_CATEGROY_LABEL_SELECTOR_1 = "#sub_dep_id_";
+    private static final String SUB_CATEGROY_LABEL_SELECTOR_2 = " > a:nth-child(";
+    private static final String SUB_CATEGROY_LABEL_SELECTOR_3 = ") > li";
+    private static final By CATEGORY_DROPDOWN_CLOSE = By.cssSelector("#category_menu_default_header > img");
 
+    //private static final String
+
+    //#sub_dep_id_3 > a:nth-child(2) > li
+    //#sub_dep_id_3 > a:nth-child(1) > li > strong
 
     public boolean isHelloPopupPresent() {
         return MainFunctions.isElementDisplayed(HELLO_POPUP);
@@ -176,5 +187,29 @@ public class homePage {
 
     public void clickAllKeellsDeals(){
         MainFunctions.clickOnUIElement(VIEW_ALL_KEELLS_DEALS);
+    }
+
+    public void clickOnCategories(){
+        MainFunctions.clickOnUIElement(CATEGORIES_LABEL);
+    }
+
+    public String getCategoriesText(){
+        return MainFunctions.getTextByElement(CATEGORIES_LABEL);
+    }
+
+    public String getCategoriesLabel(int departmentNo){
+        return MainFunctions.getTextByElement(By.cssSelector(CATEGORY_LABEL_SELECTOR_1+departmentNo));
+    }
+
+    public void clickOnCategoryLabel(int departmentNo){
+        MainFunctions.clickOnUIElement(By.cssSelector(CATEGORY_LABEL_SELECTOR_1+departmentNo));
+    }
+
+    public boolean isCategoriesDropDownPresent(){
+        return MainFunctions.isElementDisplayed(CATEGORIES_DROPDOWN);
+    }
+
+    public void clickCloseOnCategoryDropdown(){
+        MainFunctions.clickOnUIElement(CATEGORY_DROPDOWN_CLOSE);
     }
 }

@@ -1,5 +1,6 @@
 package functions;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import pages.homePage;
 
@@ -143,5 +144,28 @@ public class homeFunctions {
         homePage.clickAllKeellsDeals();
     }
 
+    public static String getCategoriesText(){
+        return homePage.getCategoriesText();
+    }
+
+    public static void viewCategoriesDropdown(){
+        homePage.clickOnCategories();
+    }
+
+    public static String getCategoriesLabel(int departmentNo){
+        return homePage.getCategoriesLabel(departmentNo);
+    }
+
+    public static void clickOnCategoriesName(int departmentNo){
+        homePage.clickOnCategoryLabel(departmentNo);
+    }
+
+    public static boolean isCategoriesDropdownDisplayed(){
+        return homePage.isCategoriesDropDownPresent();
+    }
+
+    public static void closeCategoryDropdown(){
+        homePage.clickCloseOnCategoryDropdown();
+    }
 
 }

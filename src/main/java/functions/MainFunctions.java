@@ -33,7 +33,7 @@ public class MainFunctions {
 
     public static boolean isElementDisplayed (By by){
         WebDriverWait wait = new WebDriverWait(driver1, Duration.ofSeconds(30));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(by));
+        //wait.until(ExpectedConditions.visibilityOfElementLocated(by));
         return driver1.findElement(by).isDisplayed();
     }
 
